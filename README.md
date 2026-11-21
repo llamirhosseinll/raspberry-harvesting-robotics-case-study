@@ -135,11 +135,6 @@ The merging experiment used **3 mm voxel downsampling** to reduce geometric dens
 
 Pairwise ICP registration was investigated separately; the merging workflow did not automatically apply the estimated ICP transformations.
 
-#### Point-Cloud Visualization
-
-![Greenhouse point-cloud processing](assets/point-cloud-processing.png)
-
-*Figure 1. Greenhouse point-cloud visualization illustrating the recorded 3D geometry and processing results.*
 
 These experiments supported the development of geometric scene representations for subsequent approach-planning work.
 
@@ -157,7 +152,7 @@ It follows five main steps:
 
 **1. Target Selection**
 
-A raspberry is manually selected in the 3D point cloud, providing its target coordinates.
+A raspberry is detected with a detection algorithm, providing its target coordinates.
 
 **2. Candidate Generation**
 
@@ -177,21 +172,15 @@ At each sampled position, the algorithm searches for surrounding points within a
 
 Candidates containing observed obstacles inside this radius are rejected.
 
+
 **5. Approach Ranking**
 
-The remaining candidates are ranked by their angular deviation from the frontal approach direction.
+The remaining candidates are ranked based on their minimum clearance from surrounding obstacles along the path to the target.
 
-The highest-ranked candidate is selected, and its approach direction angles are calculated.
+The candidate with the greatest minimum clearance is selected, and its approach direction angles are calculated.
 
-This method prioritizes near-frontal approaches while rejecting trajectories that fail the sampled geometric collision check.
+This method prioritizes obstacle clearance while rejecting trajectories that fail the sampled geometric collision check.
 
-#### Approach-Planning Visualization
-
-![Obstacle-aware raspberry approach planning](assets/approach-planning.png)
-
-*Figure 2. Open3D visualization of the selected raspberry target, candidate approach trajectories, and selected approach direction.*
-
-The interactive visualization allows inspection of the target, rejected trajectories, accepted candidates, and selected path.
 
 ### 2.4 Robotic Simulation — Initial Development
 
@@ -222,8 +211,6 @@ The point-cloud work produced tools for:
 - Comparing noise-removal approaches.
 - Visualizing geometric processing results.
 
-A recorded dataset inspection identified **97 point clouds**, each matched to an associated pose entry.
-
 These results characterize the recorded data and processing tools, not reconstruction accuracy or robotic harvesting performance.
 
 ### 3.2 Approach-Planning Results
@@ -235,7 +222,7 @@ The documented planner regression example produced:
 | Generated candidate approaches | 81 |
 | Accepted by collision checks | 37 |
 | Rejected by collision checks | 44 |
-| Selected frontal deviation | 0° |
+| Selected frontal deviation | 29.21° |
 
 These values describe one point cloud, selected target, and parameter configuration.
 
@@ -262,6 +249,7 @@ During the project, I:
 
 ## 5. Technologies & Methods
 
+
 | Area | Technologies & Methods |
 |---|---|
 | Programming | Python |
@@ -269,9 +257,11 @@ During the project, I:
 | Computer Vision | OpenCV, Intel RealSense SDK |
 | 3D Processing | Open3D, RGB-D Imaging, Point Clouds |
 | Geometry & Registration | ICP, Voxel Downsampling, Outlier Removal |
-| Algorithms | NumPy, SciPy, KD-Tree, Collision Checking |
+| Scientific Computing | NumPy, SciPy |
+| Algorithms & Data Structures | KD-Tree, Collision Checking, Clearance-Based Approach Ranking |
 | Robotics | Geometric Approach Planning, 3D Visualization |
 | Development | Literature Review, Architecture Adaptation, Prototype Validation |
+
 
 ---
 
