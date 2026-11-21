@@ -27,10 +27,9 @@ The following illustration summarizes the geometric approach-planning algorithm,
 
 The following screenshot shows the approach planner running on a real greenhouse point cloud.
 
-![Actual Approach Planner](assets/candidate-evaluation.png)
+![Raspberry Approach Planning Results](assets/raspberry-approach-planner-side-by-side.png)
 
-*Figure 2. Actual Open3D visualization of candidate trajectories. Green paths pass the sampled collision check, while red paths are rejected due to nearby observed obstacles.*
-
+*Figure 2. Actual Open3D prototype: candidate approach evaluation (left) and selected raspberry approach (right).*
 
 > **Note:** This repository documents my engineering contributions and prototype development at VDL Cropteq. Proprietary company code, datasets, and trained models are not publicly included.
 
